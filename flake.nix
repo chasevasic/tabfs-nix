@@ -1,7 +1,6 @@
 {
   description = "TabFS fuse module";
   inputs.nixpkgs.url = "nixpkgs/nixpkgs-unstable";
-
   outputs = { self, nixpkgs }:
   let
     lastModifiedDate = self.lastModifiedDate or self.lastModified or "19700101";
@@ -23,38 +22,32 @@
         pname = "tabfs-fuse";
         inherit version;
         src = src + "/fs";
-
         preBuild = with pkgs; ''
             export CFLAGS="-O2 -I${fuse}/include/fuse -L${fuse}/lib"
         '';
-
         installPhase = ''
             mkdir -p $out/bin
             cp tabfs $out/bin/.tabfs-wrapped
             cat <<-END_WRAPPER > $out/bin/tabfs
-							#! ${pkgs.bash}/bin/bash -e
-							export TABFS_MOUNT_DIR="/run/user/\$(id -u)/tabfs"
-							mkdir -p "\$TABFS_MOUNT_DIR"
-							exec -a "$0" "$out/bin/.tabfs-wrapped" "\$@"
-						END_WRAPPER
+	#! ${pkgs.bash}/bin/bash -e
+		export TABFS_MOUNT_DIR="/run/user/\$(id -u)/tabfs"
+		mkdir -p "\$TABFS_MOUNT_DIR"
+		exec -a "$0" "$out/bin/.tabfs-wrapped" "\$@"
+	END_WRAPPER
             chmod +x $out/bin/*
             '';
-
       };
+
       tabfs-extension =
       pkgs.stdenv.mkDerivation {
         pname = "tabfs-extension";
         inherit version;
         inherit src;
-
         nativeBuildInputs = with pkgs; [ zip ];
-
         preBuild = with pkgs; ''
             export CFLAGS="-O2 -I${fuse}/include/fuse -L${fuse}/lib"
         '';
-
         # TODO: install native-messaging-host to /run/current-system/sw/lib/{browser}/native-messaging-hosts
-
         installPhase = ''
             mkdir -p $out/bin
             mkdir -p $out/lib/{firefox,librewolf}/browser/extensions
@@ -78,7 +71,6 @@
               ln -T -s $out/tabfs $target
             done
         '';
-
       };
     };
   }
