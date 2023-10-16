@@ -11,7 +11,7 @@
     src = pkgs.fetchFromGitHub {
           owner = "osnr";
           repo = "TabFS";
-          rev = "master/HEAD";
+          rev = "e056ff9073470192ef4c8498aaa7e722edae87c2";
           hash = "sha256-PEb2pk46PWzjA6Bo9aDhxc+vAC6q5l4iCI01U8HodvU=";
         };
   in
