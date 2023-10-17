@@ -1,7 +1,7 @@
 # tabfs-nix
 Nix Flake for TabFS Browser Extension
 
-Original source code at [https://github.com/osnr/TabFS](https://github.com/osnr/TabFS). This flake makes no modification or copy of @osnr's code.
+Original source code at [https://github.com/osnr/TabFS](https://github.com/osnr/TabFS). This flake makes no modification or copy of [@osnr](https://github.com/osnr)'s code.
 
 ___
 
